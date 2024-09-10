@@ -1,9 +1,17 @@
 import { Redirect, Tabs } from 'expo-router';
 
 import { TabBarIcon } from '@/components/TabBarIcon';
+import { useAuth } from '@/context/AuthProvider';
 
 export default function TabLayout() {
-  return <Redirect href="/login" />; // Testing Authentication Route
+  const { isAuthenticated } = useAuth();
+
+  console.log(isAuthenticated);
+
+  if (!isAuthenticated) {
+    return <Redirect href="/login" />; // Testing Authentication Route
+  }
+
   return (
     <Tabs
       screenOptions={{
