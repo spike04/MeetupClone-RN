@@ -1,13 +1,13 @@
-import { Redirect, Tabs } from 'expo-router';
+import { Redirect, Tabs } from 'expo-router'
 
-import { TabBarIcon } from '@/components/TabBarIcon';
-import { useAuth } from '@/context/AuthProvider';
+import { TabBarIcon } from '@/components/TabBarIcon'
+import { useAuth } from '@/context/AuthProvider'
 
 export default function TabLayout() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuth()
 
   if (!isAuthenticated) {
-    return <Redirect href="/login" />; // Testing Authentication Route
+    return <Redirect href="/login" /> // Testing Authentication Route
   }
 
   return (
@@ -30,5 +30,5 @@ export default function TabLayout() {
         }}
       />
     </Tabs>
-  );
+  )
 }

@@ -1,5 +1,5 @@
-import { Link, Stack } from 'expo-router';
-import { Text, View } from 'react-native';
+import { Link, Stack } from 'expo-router'
+import { Text, View } from 'react-native'
 
 export default function NotFoundScreen() {
   return (
@@ -12,7 +12,7 @@ export default function NotFoundScreen() {
         </Link>
       </View>
     </>
-  );
+  )
 }
 
 const styles = {
@@ -20,4 +20,4 @@ const styles = {
   title: `text-xl font-bold`,
   link: `mt-4 pt-4`,
   linkText: `text-base text-[#2e78b7]`,
-};
+}

@@ -1,51 +1,51 @@
-import { Feather } from '@expo/vector-icons';
-import { Stack } from 'expo-router';
-import { useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Feather } from '@expo/vector-icons'
+import { Stack } from 'expo-router'
+import { useEffect, useState } from 'react'
+import { ActivityIndicator, Alert, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
-import { useAuth } from '@/context/AuthProvider';
-import { supabase } from '@/utils/supabase';
+import { useAuth } from '@/context/AuthProvider'
+import { supabase } from '@/utils/supabase'
 
 export default function Profile() {
-  const { session } = useAuth();
-  const [loading, setLoading] = useState(false);
-  const [username, setUsername] = useState('');
-  const [website, setWebsite] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [avatarUrl, setAvatarUrl] = useState('');
+  const { session } = useAuth()
+  const [loading, setLoading] = useState(false)
+  const [username, setUsername] = useState('')
+  const [website, setWebsite] = useState('')
+  const [fullName, setFullName] = useState('')
+  const [avatarUrl, setAvatarUrl] = useState('')
 
   useEffect(() => {
-    if (session) getProfile();
-  }, [session]);
+    if (session) getProfile()
+  }, [session])
 
   async function getProfile() {
-    setLoading(true);
+    setLoading(true)
     try {
-      if (!session?.user) throw new Error('No user found');
+      if (!session?.user) throw new Error('No user found')
 
       const { data, error, status } = await supabase
         .from('profiles')
         .select('username, website, full_name, avatar_url')
         .eq('id', session.user.id)
-        .single();
+        .single()
 
-      if (error && status !== 406) throw error;
+      if (error && status !== 406) throw error
 
       if (data) {
-        setUsername(data.username);
-        setWebsite(data.website);
-        setAvatarUrl(data.avatar_url);
-        setFullName(data.full_name);
+        setUsername(data.username)
+        setWebsite(data.website)
+        setAvatarUrl(data.avatar_url)
+        setFullName(data.full_name)
       }
     } catch (error) {
-      if (error instanceof Error) Alert.alert(error.message);
+      if (error instanceof Error) Alert.alert(error.message)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
   }
 
   async function updateProfile() {
-    setLoading(true);
+    setLoading(true)
     try {
       const updates = {
         id: session?.user.id,
@@ -54,15 +54,15 @@ export default function Profile() {
         full_name: fullName,
         avatar_url: avatarUrl,
         updated_at: new Date(),
-      };
+      }
 
-      const { error } = await supabase.from('profiles').upsert(updates);
+      const { error } = await supabase.from('profiles').upsert(updates)
 
-      if (error) throw error;
+      if (error) throw error
     } catch (error) {
-      if (error instanceof Error) Alert.alert(error.message);
+      if (error instanceof Error) Alert.alert(error.message)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
   }
 
@@ -76,7 +76,7 @@ export default function Profile() {
               <TouchableOpacity onPress={() => supabase.auth.signOut()} className="mr-4">
                 <Feather name="log-out" size={24} />
               </TouchableOpacity>
-            );
+            )
           },
         }}
       />
@@ -125,5 +125,5 @@ export default function Profile() {
         <Text className="text-lg font-semibold text-white">Logout</Text>
       </TouchableOpacity> */}
     </>
-  );
+  )
 }

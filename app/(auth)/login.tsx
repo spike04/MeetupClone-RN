@@ -1,5 +1,5 @@
-import { Stack } from 'expo-router';
-import React, { useState } from 'react';
+import { Stack } from 'expo-router'
+import React, { useState } from 'react'
 import {
   ActivityIndicator,
   Alert,
@@ -8,47 +8,47 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-} from 'react-native';
+} from 'react-native'
 
-import { supabase } from '@/utils/supabase';
+import { supabase } from '@/utils/supabase'
 
 AppState.addEventListener('change', (nextAppState) => {
   if (nextAppState === 'active') {
-    supabase.auth.startAutoRefresh();
+    supabase.auth.startAutoRefresh()
   } else {
-    supabase.auth.stopAutoRefresh();
+    supabase.auth.stopAutoRefresh()
   }
-});
+})
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
 
   async function signInWithEmail() {
-    setLoading(true);
+    setLoading(true)
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
-    });
+    })
 
-    if (error) Alert.alert(error.message);
-    setLoading(false);
+    if (error) Alert.alert(error.message)
+    setLoading(false)
   }
 
   async function signUpWithEmail() {
-    setLoading(true);
+    setLoading(true)
     const {
       data: { session },
       error,
     } = await supabase.auth.signUp({
       email,
       password,
-    });
+    })
 
-    if (error) Alert.alert(error.message);
-    if (!session) Alert.alert('Please check your email for a verification link!');
-    setLoading(false);
+    if (error) Alert.alert(error.message)
+    if (!session) Alert.alert('Please check your email for a verification link!')
+    setLoading(false)
   }
 
   return (
@@ -94,7 +94,7 @@ const Login = () => {
         </View>
       </View>
     </>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

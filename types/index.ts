@@ -1,8 +1,8 @@
 export interface Event {
-  id: string;
-  title: string;
-  description: string;
-  datetime: string;
-  location: string;
-  image: string;
+  id: string
+  title: string
+  description: string
+  date: string
+  location: string
+  image_uri: string
 }

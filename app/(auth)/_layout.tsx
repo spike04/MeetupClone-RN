@@ -1,13 +1,13 @@
-import { Redirect, Stack } from 'expo-router';
-import React from 'react';
+import { Redirect, Stack } from 'expo-router'
+import React from 'react'
 
-import { useAuth } from '@/context/AuthProvider';
+import { useAuth } from '@/context/AuthProvider'
 
 export default function AuthLayout() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuth()
 
   if (isAuthenticated) {
-    return <Redirect href="/(tabs)" />;
+    return <Redirect href="/(tabs)" />
   }
-  return <Stack />;
+  return <Stack />
 }

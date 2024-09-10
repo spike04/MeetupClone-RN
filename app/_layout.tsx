@@ -1,12 +1,12 @@
-import { Stack } from 'expo-router';
+import { Stack } from 'expo-router'
 
-import AuthProvider from '@/context/AuthProvider';
-import '@/global.css';
+import AuthProvider from '@/context/AuthProvider'
+import '@/global.css'
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
   initialRouteName: '(tabs)',
-};
+}
 
 export default function RootLayout() {
   return (
@@ -18,5 +18,5 @@ export default function RootLayout() {
         {/* <Stack.Screen name="(auth)/login" options={{ headerShown: false }} /> */}
       </Stack>
     </AuthProvider>
-  );
+  )
 }

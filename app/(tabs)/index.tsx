@@ -1,10 +1,23 @@
-import { Stack } from 'expo-router';
-import { FlatList, View } from 'react-native';
+import { Stack } from 'expo-router'
+import { useEffect, useState } from 'react'
+import { FlatList, View } from 'react-native'
 
-import events from '@/assets/events.json';
-import EventListItem from '@/components/EventListItem';
+import EventListItem from '@/components/EventListItem'
+import { Event } from '@/types'
+import { supabase } from '@/utils/supabase'
 
 export default function Events() {
+  const [events, setEvents] = useState<Event[]>([])
+
+  const fetchEvents = async () => {
+    const { data } = await supabase.from('events').select('*')
+    setEvents(data as Event[])
+  }
+
+  useEffect(() => {
+    fetchEvents()
+  }, [])
+
   return (
     <>
       <Stack.Screen options={{ title: 'Events' }} />
@@ -18,5 +31,5 @@ export default function Events() {
         ItemSeparatorComponent={() => <View className="h-px bg-gray-200" />}
       />
     </>
-  );
+  )
 }
