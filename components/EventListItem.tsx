@@ -2,6 +2,8 @@ import { Feather } from '@expo/vector-icons';
 import React from 'react';
 import { Image, Text, View } from 'react-native';
 
+import { Event } from '@/types';
+
 interface Props {
   event: Event;
 }
