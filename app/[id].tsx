@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 import events from '@/assets/events.json';
 
@@ -30,6 +30,15 @@ const EventDetails = () => {
         <Text className="text-md" numberOfLines={2}>
           {event.description}
         </Text>
+
+        {/* Footer */}
+        <View className="absolute bottom-0 left-0 right-0 flex-row items-center justify-between border-t border-gray-200 bg-white p-4 pb-10">
+          <Text className="text-xl font-semibold">Free</Text>
+
+          <TouchableOpacity className="flex-row items-center gap-3 rounded-lg bg-red-400 p-3 px-8">
+            <Text className="text-lg font-semibold text-white">Join and RSVP</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </>
   );
