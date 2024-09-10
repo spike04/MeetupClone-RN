@@ -77,7 +77,7 @@ const EventDetails = () => {
         <View className="absolute bottom-0 left-0 right-0 flex-row items-center justify-between border-t border-gray-200 bg-white p-4 pb-10">
           <Text className="text-xl font-semibold">Free</Text>
 
-          <TouchableOpacity className="flex-row items-center gap-3 rounded-lg bg-red-400 p-3 px-8">
+          <TouchableOpacity className="flex-row items-center justify-center gap-3 rounded-lg bg-red-400 p-3 px-8">
             <Text className="text-lg font-semibold text-white">Join and RSVP</Text>
           </TouchableOpacity>
         </View>
