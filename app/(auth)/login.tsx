@@ -1,6 +1,14 @@
 import { Stack } from 'expo-router';
 import React, { useState } from 'react';
-import { Alert, AppState, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Alert,
+  AppState,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 import { supabase } from '@/utils/supabase';
 
@@ -69,14 +77,18 @@ const Login = () => {
             disabled={loading}
             className="flex-row items-center justify-center gap-3 rounded-lg bg-red-400 p-3 px-8 disabled:bg-gray-300"
             onPress={signInWithEmail}>
-            <Text className="text-lg font-semibold text-white">Sign In</Text>
+            {loading && <ActivityIndicator className="text-white" />}
+            <Text className="text-lg font-semibold text-white">
+              {loading ? 'Loading...' : 'Sign In'}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             disabled={loading}
             className="flex-row items-center justify-center gap-3 rounded-lg border border-red-400 p-3 px-8 disabled:border-gray-300"
             onPress={signUpWithEmail}>
+            {loading && <ActivityIndicator className="text-white" />}
             <Text className={`text-lg font-semibold text-red-500 ${loading && 'text-gray-300'}`}>
-              Sign Up
+              {loading ? 'Loading...' : 'Sign In'}
             </Text>
           </TouchableOpacity>
         </View>
