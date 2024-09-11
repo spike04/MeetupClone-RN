@@ -88,7 +88,7 @@ const Login = () => {
             onPress={signUpWithEmail}>
             {loading && <ActivityIndicator className="text-white" />}
             <Text className={`text-lg font-semibold text-red-500 ${loading && 'text-gray-300'}`}>
-              {loading ? 'Loading...' : 'Sign In'}
+              {loading ? 'Loading...' : 'Sign Up'}
             </Text>
           </TouchableOpacity>
         </View>

@@ -1,6 +1,6 @@
 import { Feather } from '@expo/vector-icons'
 import dayjs from 'dayjs'
-import { Stack, useLocalSearchParams } from 'expo-router'
+import { Link, Stack, useLocalSearchParams } from 'expo-router'
 import React, { useEffect, useState } from 'react'
 import { ActivityIndicator, Image, Text, TouchableOpacity, View } from 'react-native'
 
@@ -80,6 +80,12 @@ const EventDetails = () => {
         <Text className="text-md" numberOfLines={2}>
           {event.description}
         </Text>
+        <Link
+          href={`/event/${event.id}/attendance`}
+          className="text-md underline"
+          numberOfLines={2}>
+          View Attendance
+        </Link>
 
         <TouchableOpacity className="mt-8 flex-row items-start gap-4">
           <Feather name="calendar" size={20} />
