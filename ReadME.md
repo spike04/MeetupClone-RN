@@ -5,11 +5,12 @@ This is a clone of the popular Meetup app built with Expo and React Native. It w
 ## Screenshots
 
 <p>
+<img src="./screenshots/3.png" width="240" style="padding: 10px"/>
 <img src="./screenshots/1.png" width="240" style="padding: 10px"/>
 <img src="./screenshots/2.png" width="240" style="padding: 10px"/>
-<img src="./screenshots/3.png" width="240" style="padding: 10px"/>
-<img src="./screenshots/4.png" width="240" style="padding: 10px"/>
 <img src="./screenshots/5.png" width="240" style="padding: 10px"/>
+<img src="./screenshots/6.png" width="240" style="padding: 10px"/>
+<img src="./screenshots/4.png" width="240" style="padding: 10px"/>
 </p>
 
 **This is an ongoing project and will be updated as I go through the process of building this app.**
