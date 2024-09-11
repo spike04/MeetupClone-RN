@@ -6,3 +6,10 @@ export interface Event {
   location: string
   image_uri: string
 }
+
+export interface Attendance {
+  created_at: string
+  event_id: number
+  id: number
+  user_id: string
+}

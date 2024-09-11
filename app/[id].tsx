@@ -4,23 +4,33 @@ import { Stack, useLocalSearchParams } from 'expo-router'
 import React, { useEffect, useState } from 'react'
 import { ActivityIndicator, Image, Text, TouchableOpacity, View } from 'react-native'
 
-import { Event } from '@/types'
+import { useAuth } from '@/context/AuthProvider'
+import { Attendance, Event } from '@/types'
 import { supabase } from '@/utils/supabase'
 
 const EventDetails = () => {
   const { id } = useLocalSearchParams()
+  const { user } = useAuth()
 
   const [event, setEvent] = useState<Event>()
   const [loading, setLoading] = useState(false)
+  const [attendance, setAttendance] = useState<Attendance | null>(null)
 
   useEffect(() => {
     async function fetchEvent() {
       setLoading(true)
       try {
         const { data } = await supabase.from('events').select('*').eq('id', id).single()
-        if (data) {
-          setEvent(data as Event)
-        }
+        setEvent(data as Event)
+
+        const { data: attendanceData } = await supabase
+          .from('attendance')
+          .select('*')
+          .eq('user_id', user.id)
+          .eq('event_id', id)
+          .single()
+
+        setAttendance(attendanceData)
       } catch (error) {
         console.log(error)
       } finally {
@@ -29,6 +39,19 @@ const EventDetails = () => {
     }
     fetchEvent()
   }, [id])
+
+  const joinTheEvent = async () => {
+    const { data, error } = await supabase
+      .from('attendance')
+      .insert({
+        user_id: user.id,
+        event_id: event?.id,
+      })
+      .select()
+      .single()
+
+    setAttendance(data)
+  }
 
   let widget
 
@@ -97,9 +120,15 @@ const EventDetails = () => {
         <View className="absolute bottom-0 left-0 right-0 flex-row items-center justify-between border-t border-gray-200 bg-white p-4 pb-10">
           <Text className="text-xl font-semibold">Free</Text>
 
-          <TouchableOpacity className="flex-row items-center justify-center gap-3 rounded-lg bg-red-400 p-3 px-8">
-            <Text className="text-lg font-semibold text-white">Join and RSVP</Text>
-          </TouchableOpacity>
+          {attendance ? (
+            <Text className="font-bold text-green-500">You are attending</Text>
+          ) : (
+            <TouchableOpacity
+              className="flex-row items-center justify-center gap-3 rounded-lg bg-red-400 p-3 px-8"
+              onPress={joinTheEvent}>
+              <Text className="text-lg font-semibold text-white">Join and RSVP</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     )
